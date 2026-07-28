@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>{{ title or "Website Summarizer" }}</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/github-markdown-css@5.8.1/github-markdown.min.css"
+    >
+
+    <style>
+
+        body {
+            background: #f8fafc;
+        }
+
+        .markdown-body {
+            background: #ffffff;
+            color: #24292f;
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Markdown tables */
+        .markdown-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .markdown-body th,
+        .markdown-body td {
+            border: 1px solid #d1d5db;
+            padding: 0.75rem 1rem;
+            color: #1f2937;
+            background: #ffffff;
+            text-align: left;
+        }
+
+        .markdown-body th {
+            background: #f8fafc;
+            font-weight: 600;
+        }
+
+        .markdown-body tr:nth-child(even) td {
+            background: #f9fafb;
+        }
+
+        .markdown-body tr:hover td {
+            background: #f3f4f6;
+        }
+
+        .htmx-indicator {
+            display: none;
+        }
+
+        .htmx-request .htmx-indicator {
+            display: inline-flex;
+        }
+
+        .htmx-request.htmx-indicator {
+            display: inline-flex;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+{% block content %}
+
+{% endblock %}
+
+</body>
+
+</html>
