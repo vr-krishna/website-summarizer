@@ -28,11 +28,6 @@ class OpenAIService:
                     },
                 ],
             )
-            summary = response.choices[0].message.content
-
-            print("=" * 80)
-            print(repr(summary))
-            print("=" * 80)
 
             return response.choices[0].message.content
 

@@ -1,7 +1,7 @@
 [project]
 name = "website-summarizer"
 version = "0.1.0"
-description = "Add your description here"
+description = "An AI-powered website summarizer built with FastAPI, HTMX, Jinja2, BeautifulSoup, and the OpenAI API."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
