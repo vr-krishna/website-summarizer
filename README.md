@@ -23,15 +23,15 @@ An AI-powered website summarizer built with **FastAPI**, **HTMX**, **Jinja2**, *
 
 ### Home Page
 
-```
-![Home Page](docs/images/home.png)
-```
+
+![Home Page](./docs/images/home.png)
+
 
 ### Generated Summary
 
-```
-![Generated Summary](docs/images/summary.png)
-```
+
+![Generated Summary](./docs/images/summary.png)
+
 
 ---
 
