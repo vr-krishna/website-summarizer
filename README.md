@@ -20,18 +20,17 @@ An AI-powered website summarizer built with **FastAPI**, **HTMX**, **Jinja2**, *
 
 ## 📸 Screenshots
 
-> Add screenshots after deployment.
 
 ### Home Page
 
 ```
-docs/images/home.png
+![Home Page](docs/images/home.png)
 ```
 
 ### Generated Summary
 
 ```
-docs/images/summary.png
+![Generated Summary](docs/images/summary.png)
 ```
 
 ---
