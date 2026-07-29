@@ -18,6 +18,12 @@ An AI-powered website summarizer built with **FastAPI**, **HTMX**, **Jinja2**, *
 
 ---
 
+## 🚀 Live Demo
+
+🌍 **Website:** https://website-summarizer-znpu.onrender.com
+
+Try summarizing any publicly accessible website in your browser.
+
 ## 📸 Screenshots
 
 
