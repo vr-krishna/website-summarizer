@@ -7,6 +7,7 @@ from fastapi import (
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from app.services.markdown_renderer import render_markdown
+from app.core.exceptions import WebsiteFetchError
 
 from app.core.dependencies import get_summarizer
 from app.services.summarizer import WebsiteSummarizer
@@ -26,21 +27,40 @@ async def home(request: Request):
             "title": "Website Summarizer",
         },
     )
-
 @router.post("/summarize", response_class=HTMLResponse)
 async def summarize(
     request: Request,
     url: str = Form(...),
     summarizer: WebsiteSummarizer = Depends(get_summarizer),
 ):
-    summary = await summarizer.summarize(url)
+    try:
+        summary = await summarizer.summarize(url)
+        summary_html = render_markdown(summary)
 
-    summary_html = render_markdown(summary)
+        return templates.TemplateResponse(
+            request=request,
+            name="summary.html",
+            context={
+                "summary": summary_html,
+            },
+        )
 
-    return templates.TemplateResponse(
-        request=request,
-        name="summary.html",
-        context={
-            "summary": summary_html,
-        },
-    )
+    except WebsiteFetchError as exc:
+        return templates.TemplateResponse(
+            request=request,
+            name="summary.html",
+            context={
+                "error": str(exc),
+            },
+            status_code=200,
+        )
+
+    except Exception:
+        return templates.TemplateResponse(
+            request=request,
+            name="summary.html",
+            context={
+                "error": "An unexpected error occurred. Please try again.",
+            },
+            status_code=500,
+        )

@@ -11,7 +11,10 @@ from app.core.prompts import (
 class OpenAIService:
     """Service for generating summaries using the OpenAI API."""
 
-    def __init__(self, client: AsyncOpenAI | None = None) -> None:
+    def __init__(
+        self,
+        client: AsyncOpenAI | None = None,
+    ) -> None:
         self.client = client or AsyncOpenAI(
             api_key=settings.openai_api_key,
         )
@@ -47,4 +50,6 @@ class OpenAIService:
             raise
 
         except Exception as exc:
-            raise SummarizationError(str(exc)) from exc
+            raise SummarizationError(
+                "Failed to generate the summary."
+            ) from exc

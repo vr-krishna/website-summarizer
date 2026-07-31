@@ -28,8 +28,25 @@ class WebsiteFetcher:
 
                 response.raise_for_status()
 
+        except httpx.TimeoutException as exc:
+            raise WebsiteFetchError(
+                "The website took too long to respond."
+            ) from exc
+
+        except httpx.ConnectError as exc:
+            raise WebsiteFetchError(
+                "Unable to connect to the website."
+            ) from exc
+
+        except httpx.HTTPStatusError as exc:
+            raise WebsiteFetchError(
+                f"The website returned HTTP {exc.response.status_code}."
+            ) from exc
+
         except httpx.HTTPError as exc:
-            raise WebsiteFetchError(str(exc)) from exc
+            raise WebsiteFetchError(
+                "Unable to retrieve the website."
+            ) from exc
 
         soup = BeautifulSoup(
             response.text,
