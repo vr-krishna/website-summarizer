@@ -7,15 +7,20 @@ from app.core.prompts import (
     user_prompt_prefix,
 )
 
-client = AsyncOpenAI(
-    api_key=settings.openai_api_key,
-)
-
 
 class OpenAIService:
+    """Service for generating summaries using the OpenAI API."""
+
+    def __init__(self, client: AsyncOpenAI | None = None) -> None:
+        self.client = client or AsyncOpenAI(
+            api_key=settings.openai_api_key,
+        )
+
     async def summarize(self, webpage: str) -> str:
+        """Generate a summary for the given webpage content."""
+
         try:
-            response = await client.chat.completions.create(
+            response = await self.client.chat.completions.create(
                 model=settings.model_name,
                 messages=[
                     {
@@ -24,12 +29,22 @@ class OpenAIService:
                     },
                     {
                         "role": "user",
-                        "content": user_prompt_prefix + webpage,
+                        "content": f"{user_prompt_prefix}{webpage}",
                     },
                 ],
             )
 
-            return response.choices[0].message.content
+            content = response.choices[0].message.content
+
+            if not content:
+                raise SummarizationError(
+                    "OpenAI returned an empty response."
+                )
+
+            return content
+
+        except SummarizationError:
+            raise
 
         except Exception as exc:
             raise SummarizationError(str(exc)) from exc
